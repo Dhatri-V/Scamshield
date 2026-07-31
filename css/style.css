@@ -1,0 +1,540 @@
+/*
+  ScamShield shared stylesheet
+  This file contains the main visual system used across the website.
+  The goal is to keep the CSS organised, reusable, and beginner-friendly.
+*/
+
+/* Basic reset:
+   Removes inconsistent default spacing and helps sizing behave predictably. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* CSS variables:
+   These store reusable design values such as colours, spacing, and shadows. */
+:root {
+  --font-heading: "Trebuchet MS", "Gill Sans", sans-serif;
+  --font-body: Verdana, Geneva, sans-serif;
+  --color-background: #07111f;
+  --color-surface: rgba(9, 27, 48, 0.88);
+  --color-surface-strong: #102846;
+  --color-surface-soft: #dce9f8;
+  --color-primary: #52e3c2;
+  --color-primary-dark: #1ea78c;
+  --color-accent: #89b4ff;
+  --color-text: #f5f9ff;
+  --color-text-soft: #bfd0e3;
+  --color-heading-dark: #0a1a2f;
+  --color-body-dark: #30455f;
+  --color-border: rgba(130, 169, 215, 0.22);
+  --color-white: #ffffff;
+  --shadow-soft: 0 18px 45px rgba(1, 10, 20, 0.24);
+  --shadow-card: 0 16px 30px rgba(2, 11, 24, 0.14);
+  --radius-large: 24px;
+  --radius-medium: 18px;
+  --radius-small: 12px;
+  --container-width: 1120px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at top left, rgba(83, 168, 255, 0.18), transparent 26%),
+    linear-gradient(180deg, #06101d 0%, #0a1830 42%, #eef5fb 42%, #f7fbff 100%);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* The container class keeps content centered and prevents it from stretching too wide. */
+.container {
+  width: min(100% - 2rem, var(--container-width));
+  margin: 0 auto;
+}
+
+/* Header and navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  background-color: rgba(5, 13, 24, 0.78);
+  border-bottom: 1px solid rgba(164, 192, 227, 0.12);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.brand-mark {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-white);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--color-text-soft);
+  font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.text-link:hover,
+.text-link:focus-visible,
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--color-primary);
+}
+
+/* Button styles:
+   These classes can be reused for links and future form buttons. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background-color: var(--color-primary);
+  color: #062437;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background-color: #72ebd0;
+}
+
+.button-secondary {
+  border: 1px solid rgba(164, 216, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-white);
+}
+
+.button-secondary:hover,
+.button-secondary:focus-visible {
+  border-color: rgba(164, 216, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Hero section */
+.hero-section {
+  padding: 5rem 0 4rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  line-height: 1.05;
+  max-width: 11ch;
+  margin-bottom: 1.2rem;
+}
+
+.hero-text,
+.section-heading p,
+.feature-card p,
+.category-card p,
+.step-card p,
+.family-content p,
+.tip-card p,
+.cta-panel p,
+.footer-text {
+  color: var(--color-text-soft);
+}
+
+.hero-text {
+  max-width: 58ch;
+  font-size: 1.1rem;
+  margin-bottom: 1.8rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-actions,
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-highlights {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+
+.hero-highlights li {
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(162, 196, 240, 0.18);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-white);
+}
+
+.hero-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.status-card {
+  width: 100%;
+  padding: 2rem;
+  border: 1px solid rgba(124, 181, 255, 0.18);
+  border-radius: var(--radius-large);
+  background:
+    linear-gradient(180deg, rgba(18, 47, 80, 0.95), rgba(8, 23, 40, 0.95));
+  box-shadow: var(--shadow-soft);
+}
+
+.status-label {
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.status-card h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Main content sections */
+.content-section {
+  padding: 4.5rem 0;
+}
+
+.section-muted {
+  background-color: rgba(225, 238, 249, 0.8);
+}
+
+.section-heading {
+  max-width: 52rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-heading h2,
+.feature-card h3,
+.category-card h3,
+.step-card h3,
+.family-content h2,
+.family-list-card h3,
+.tip-card h3,
+.cta-panel h2,
+.footer-title {
+  color: var(--color-heading-dark);
+}
+
+.section-heading h2,
+.family-content h2,
+.cta-panel h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 0.9rem;
+}
+
+.section-heading p:last-child,
+.family-content p,
+.cta-panel p {
+  color: var(--color-body-dark);
+}
+
+/* Grid utilities:
+   These grid patterns make it easier to reuse card layouts in multiple sections. */
+.card-grid,
+.steps-grid,
+.family-grid,
+.footer-grid,
+.tips-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.three-column-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.four-column-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.feature-card,
+.category-card,
+.step-card,
+.family-list-card,
+.tip-card,
+.cta-panel {
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-card);
+}
+
+.feature-card,
+.step-card,
+.tip-card {
+  padding: 1.75rem;
+  background-color: var(--color-white);
+  border: 1px solid rgba(120, 154, 194, 0.16);
+}
+
+.category-card {
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(120, 154, 194, 0.16);
+}
+
+.feature-card h3,
+.category-card h3,
+.step-card h3,
+.family-list-card h3,
+.tip-card h3 {
+  font-family: var(--font-heading);
+  margin-bottom: 0.8rem;
+  font-size: 1.25rem;
+}
+
+.feature-card p,
+.category-card p,
+.step-card p,
+.tip-card p {
+  color: var(--color-body-dark);
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #0f5f87;
+  font-weight: 700;
+}
+
+.steps-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: #d8f6f0;
+  color: #0e6d5c;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.family-section {
+  background:
+    linear-gradient(135deg, rgba(9, 30, 55, 0.98), rgba(18, 60, 89, 0.95));
+}
+
+.family-grid {
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+}
+
+.family-content h2,
+.family-content p,
+.family-list-card h3,
+.check-list li {
+  color: var(--color-white);
+}
+
+.family-list-card {
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(176, 220, 255, 0.16);
+}
+
+.check-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.check-list li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.check-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.58rem;
+  left: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.tips-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cta-panel {
+  padding: 2.5rem;
+  background:
+    linear-gradient(135deg, #d9fff5 0%, #eef6ff 55%, #d9e8ff 100%);
+  border: 1px solid rgba(112, 151, 192, 0.22);
+}
+
+/* Footer */
+.site-footer {
+  padding: 3rem 0;
+  background-color: #06101d;
+  border-top: 1px solid rgba(164, 192, 227, 0.12);
+}
+
+.footer-grid {
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
+}
+
+.brand-mark-footer {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.footer-title {
+  color: var(--color-white);
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.footer-links a {
+  color: var(--color-text-soft);
+}
+
+/* Focus styles:
+   These help keyboard users see which link or button is currently selected. */
+a:focus-visible {
+  outline: 3px solid rgba(82, 227, 194, 0.45);
+  outline-offset: 4px;
+}
+
+/* Responsive design:
+   Media queries adjust the layout for tablets and phones. */
+@media (max-width: 980px) {
+  .hero-grid,
+  .family-grid,
+  .three-column-grid,
+  .four-column-grid,
+  .steps-grid,
+  .tips-grid,
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-content h1 {
+    max-width: 14ch;
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    justify-content: center;
+  }
+
+  .hero-section {
+    padding-top: 3.5rem;
+  }
+
+  .hero-grid,
+  .family-grid,
+  .three-column-grid,
+  .four-column-grid,
+  .steps-grid,
+  .tips-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    max-width: 100%;
+  }
+
+  .status-card,
+  .feature-card,
+  .category-card,
+  .step-card,
+  .family-list-card,
+  .tip-card,
+  .cta-panel {
+    padding: 1.5rem;
+  }
+
+  .button,
+  .hero-actions .button,
+  .cta-actions .button {
+    width: 100%;
+  }
+}
